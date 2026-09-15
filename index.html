@@ -1,0 +1,1075 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>IQC iPhone - Blue Frost Edition</title>  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  >  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >  <style>
+    :root {
+      --bg-gradient:
+        radial-gradient(circle at top right, #060b1a, #010205);
+
+      --card-bg: rgba(15, 20, 35, 0.9);
+      --accent-color: #00a2ff;
+      --accent-light: #00d4ff;
+      --text-white: #f8fafc;
+      --input-bg: #1e293b;
+      --border-color: rgba(0, 162, 255, 0.3);
+      --wa-color: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-white);
+      overflow: hidden;
+      height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Background */
+
+    .bg-mesh {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+
+      background-image:
+        radial-gradient(
+          at 0% 0%,
+          rgba(0, 162, 255, 0.08) 0px,
+          transparent 50%
+        ),
+        radial-gradient(
+          at 100% 100%,
+          rgba(255, 255, 255, 0.03) 0px,
+          transparent 50%
+        );
+    }
+
+    /* Main Card */
+
+    .form-card {
+      position: relative;
+
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      padding: 30px 25px 25px;
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+
+      width: 95%;
+      max-width: 370px;
+
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        inset 0 0 15px rgba(0, 162, 255, 0.05);
+
+      text-align: center;
+    }
+
+    /* Skip / Close button */
+
+    .btn-skip {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+
+      width: 28px;
+      height: 28px;
+
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+    .btn-skip:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      transform: none;
+    }
+
+    /* Brand */
+
+    .brand-section {
+      margin-bottom: 25px;
+    }
+
+    .logo-circle {
+      width: 60px;
+      height: 60px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--accent-color),
+          var(--accent-light)
+        );
+
+      border-radius: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin: 0 auto 12px;
+
+      box-shadow:
+        0 8px 20px rgba(0, 162, 255, 0.4);
+
+      transform: rotate(-5deg);
+    }
+
+    .logo-circle i {
+      font-size: 30px;
+      color: #fff;
+      transform: rotate(5deg);
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Gate */
+
+    .gate-text {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .btn-gate {
+      margin-bottom: 12px;
+    }
+
+    .btn-wa {
+      background: var(--wa-color) !important;
+      color: #fff !important;
+    }
+
+    .skip-text {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #475569;
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: auto;
+      padding: 0;
+    }
+
+    .skip-text:hover {
+      color: #94a3b8;
+      background: none;
+      transform: none;
+    }
+
+    /* Progress */
+
+    .progress-container {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+
+      height: 6px;
+      border-radius: 10px;
+
+      margin-top: 20px;
+      overflow: hidden;
+
+      display: none;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--accent-color);
+      transition: 0.3s;
+    }
+
+    /* Inputs */
+
+    .input-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .label-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .label-row i {
+      font-size: 14px;
+      color: var(--accent-color);
+      width: 18px;
+      text-align: center;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+
+    input,
+    select {
+      width: 100%;
+
+      padding: 12px 16px;
+
+      background: var(--input-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+
+      border-radius: 12px;
+
+      color: #fff;
+      font-size: 14px;
+
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--accent-color);
+      background: #242f41;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    /* Buttons */
+
+    button {
+      width: 100%;
+
+      padding: 14px;
+
+      margin-top: 10px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: #fff;
+      color: #000;
+
+      font-weight: 700;
+      font-size: 14px;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: var(--accent-color);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-back {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    /* Pages */
+
+    .page {
+      position: absolute;
+
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition: 0.4s ease;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    /* Loader */
+
+    .loader {
+      width: 35px;
+      height: 35px;
+
+      border: 3px solid rgba(0, 162, 255, 0.1);
+      border-top-color: var(--accent-color);
+
+      border-radius: 50%;
+
+      animation: spin 0.8s linear infinite;
+
+      margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Result */
+
+    #hasilImg {
+      width: 100%;
+
+      border-radius: 16px;
+
+      margin: 15px 0;
+
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      display: block;
+    }
+
+    /* Footer */
+
+    .footer-credit {
+      position: fixed;
+      bottom: 15px;
+
+      font-size: 10px;
+
+      color: #475569;
+
+      letter-spacing: 1px;
+    }
+
+    .footer-credit b {
+      color: var(--accent-color);
+    }
+
+    /* Mobile */
+
+    @media (max-width: 400px) {
+      .form-card {
+        padding: 25px 20px 20px;
+      }
+
+      h2 {
+        font-size: 16px;
+      }
+    }
+  </style></head><body>  <div class="bg-mesh"></div>  <!-- =========================
+       GATE PAGE
+  ========================== -->  <div id="gatePage" class="page"><div class="form-card">
+
+  <button
+    class="btn-skip"
+    onclick="skipVerifikasi()"
+    aria-label="Lewati verifikasi"
+    title="Lewati verifikasi"
+  >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <div class="brand-section">
+
+    <div class="logo-circle">
+      <i class="fa-solid fa-lock"></i>
+    </div>
+
+    <h2>VERIFIKASI AKSES 🔒</h2>
+
+  </div>
+
+  <p class="gate-text">
+    Selesaikan misi di bawah untuk membuka panel
+    IQC iPhone secara gratis!
+  </p>
+
+  <button
+    class="btn-gate"
+    onclick="followSaluran()"
+  >
+    <i class="fa-solid fa-bell"></i>
+    FOLLOW SALURAN
+  </button>
+
+  <button
+    class="btn-gate btn-wa"
+    onclick="shareWA()"
+  >
+    <i class="fa-brands fa-whatsapp"></i>
+    SHARE KE TEMAN
+  </button>
+
+  <div
+    class="progress-container"
+    id="pContainer"
+  >
+    <div
+      class="progress-bar"
+      id="pBar"
+    ></div>
+  </div>
+
+  <p
+    id="statusText"
+    style="
+      font-size:11px;
+      margin-top:8px;
+      color:#475569;
+      display:none;
+    "
+  >
+    Mengecek Verifikasi...
+  </p>
+
+  <button
+    class="skip-text"
+    onclick="skipVerifikasi()"
+  >
+    Lewati, langsung masuk →
+  </button>
+
+</div>
+
+  </div>  <!-- =========================
+       HOME PAGE
+  ========================== -->  <div id="homePage" class="page hidden"><div class="form-card">
+
+  <div class="brand-section">
+
+    <div class="logo-circle">
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <h2>IQC FAKE IOS</h2>
+
+  </div>
+
+
+  <!-- TIME -->
+
+  <div class="input-group">
+
+    <div class="label-row">
+
+      <i class="fa-regular fa-clock"></i>
+
+      <label for="time">
+        Waktu
+      </label>
+
+    </div>
+
+    <input
+      type="text"
+      id="time"
+      value="22:23"
+      placeholder="HH:MM"
+    >
+
+  </div>
+
+
+  <!-- BATTERY -->
+
+  <div class="input-group">
+
+    <div class="label-row">
+
+      <i class="fa-solid fa-battery-full"></i>
+
+      <label for="battery">
+        Baterai
+      </label>
+
+    </div>
+
+    <input
+      type="number"
+      id="battery"
+      value="100"
+      min="0"
+      max="100"
+    >
+
+  </div>
+
+
+  <!-- PROVIDER -->
+
+  <div class="input-group">
+
+    <div class="label-row">
+
+      <i class="fa-solid fa-wifi"></i>
+
+      <label for="carrier">
+        Provider
+      </label>
+
+    </div>
+
+    <select id="carrier">
+
+      <option value="Telkomsel">
+        Telkomsel
+      </option>
+
+      <option value="Indosat">
+        Indosat
+      </option>
+
+      <option value="XL">
+        XL
+      </option>
+
+      <option value="Tri">
+        Tri
+      </option>
+
+      <option value="Smartfren">
+        Smartfren
+      </option>
+
+      <option value="Axis">
+        Axis
+      </option>
+
+      <option value="By.U">
+        By.U
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <!-- MESSAGE -->
+
+  <div class="input-group">
+
+    <div class="label-row">
+
+      <i class="fa-solid fa-message"></i>
+
+      <label for="message">
+        Pesan
+      </label>
+
+    </div>
+
+    <input
+      type="text"
+      id="message"
+      placeholder="Masukkan quote anda..."
+    >
+
+  </div>
+
+
+  <!-- GENERATE -->
+
+  <button onclick="buatGambar()">
+
+    <i class="fa-solid fa-paper-plane"></i>
+
+    GENERATE ⚡
+
+  </button>
+
+</div>
+
+  </div>  <!-- =========================
+       LOADING PAGE
+  ========================== -->  <div id="loadingPage" class="page hidden"><div
+  class="form-card"
+  style="text-align:center;"
+>
+
+  <div class="loader"></div>
+
+  <p
+    style="
+      font-size:12px;
+      font-weight:700;
+    "
+  >
+    PROSES GENERATE... ⚡
+  </p>
+
+</div>
+
+  </div>  <!-- =========================
+       RESULT PAGE
+  ========================== -->  <div id="resultPage" class="page hidden"><div
+  class="form-card"
+  style="text-align:center;"
+>
+
+  <h2
+    style="
+      font-size:14px;
+      margin-bottom:10px;
+    "
+  >
+    SELESAI, BOS! ⚡
+  </h2>
+
+  <img
+    id="hasilImg"
+    src=""
+    alt="Hasil IQC"
+  >
+
+  <button onclick="downloadGambar()">
+
+    <i class="fa-solid fa-download"></i>
+
+    SIMPAN GAMBAR
+
+  </button>
+
+  <button
+    class="btn-back"
+    onclick="kembali()"
+  >
+    EDIT LAGI
+  </button>
+
+</div>
+
+  </div>  <!-- =========================
+       FOOTER
+  ========================== -->  <div class="footer-credit">
+    © 2026 BY <b>AFAPAKEF</b> ⚡
+  </div>  <script>
+
+    /*
+     * ==========================================
+     * IQC FAKE IP
+     * BLUE FROST EDITION
+     * ==========================================
+     */
+
+
+    // ==============================
+    // ELEMENT
+    // ==============================
+
+    const gate = document.getElementById("gatePage");
+
+    const home = document.getElementById("homePage");
+
+    const load = document.getElementById("loadingPage");
+
+    const result = document.getElementById("resultPage");
+
+    const hasilImg =
+      document.getElementById("hasilImg");
+
+
+    // ==============================
+    // STATUS VERIFICATION
+    // ==============================
+
+    let isFollowed = false;
+
+    let isShared = false;
+
+    let imageUrl = "";
+
+
+    // ==============================
+    // CHANNEL
+    // ==============================
+
+    const channelURL =
+      "https://whatsapp.com/channel/0029Vb9CShfFi8xTpTZpDi0J";
+
+
+    // ==============================
+    // FOLLOW CHANNEL
+    // ==============================
+
+    function followSaluran() {
+
+      window.open(
+        channelURL,
+        "_blank"
+      );
+
+      isFollowed = true;
+
+      cekProgress();
+    }
+
+
+    // ==============================
+    // SHARE WHATSAPP
+    // ==============================
+
+    function shareWA() {
+
+      const waText =
+        `*WEBSITE IQC FAKE IP*
+> ${window.location.href}
+
+*SUMBER UTAMA*
+> ${channelURL}`;
+
+      const encodedText =
+        encodeURIComponent(waText);
+
+      const waURL =
+        `https://api.whatsapp.com/send?text=${encodedText}`;
+
+      window.open(
+        waURL,
+        "_blank"
+      );
+
+      isShared = true;
+
+      cekProgress();
+    }
+
+
+    // ==============================
+    // PROGRESS VERIFICATION
+    // ==============================
+
+    function cekProgress() {
+
+      if (!isFollowed && !isShared) {
+        return;
+      }
+
+      const container =
+        document.getElementById("pContainer");
+
+      const bar =
+        document.getElementById("pBar");
+
+      const status =
+        document.getElementById("statusText");
+
+
+      container.style.display = "block";
+
+      status.style.display = "block";
+
+
+      let progress =
+        isFollowed && isShared
+          ? 100
+          : 50;
+
+
+      bar.style.width =
+        progress + "%";
+
+
+      if (
+        isFollowed &&
+        isShared
+      ) {
+
+        setTimeout(() => {
+
+          tampilkan(home);
+
+        }, 1500);
+
+      }
+
+    }
+
+
+    // ==============================
+    // SKIP VERIFICATION
+    // ==============================
+
+    function skipVerifikasi() {
+
+      tampilkan(home);
+
+    }
+
+
+    // ==============================
+    // PAGE TRANSITION
+    // ==============================
+
+    function tampilkan(element) {
+
+      [
+        gate,
+        home,
+        load,
+        result
+      ].forEach(page => {
+
+        page.classList.add("hidden");
+
+      });
+
+
+      element.classList.remove("hidden");
+
+    }
+
+
+    // ==============================
+    // GENERATE IMAGE
+    // ==============================
+
+    function buatGambar() {
+
+      const time =
+        document
+          .getElementById("time")
+          .value
+          .trim();
+
+
+      const battery =
+        document
+          .getElementById("battery")
+          .value
+          .trim();
+
+
+      const carrier =
+        document
+          .getElementById("carrier")
+          .value
+          .trim();
+
+
+      const message =
+        document
+          .getElementById("message")
+          .value
+          .trim();
+
+
+      // VALIDATION
+
+      if (
+        !time ||
+        !battery ||
+        !carrier ||
+        !message
+      ) {
+
+        alert(
+          "Data wajib diisi semua, bos! ⚡"
+        );
+
+        return;
+
+      }
+
+
+      // CHECK BATTERY
+
+      const batteryNumber =
+        Number(battery);
+
+
+      if (
+        isNaN(batteryNumber) ||
+        batteryNumber < 0 ||
+        batteryNumber > 100
+      ) {
+
+        alert(
+          "Baterai harus berada di antara 0 sampai 100."
+        );
+
+        return;
+
+      }
+
+
+      // SHOW LOADING
+
+      tampilkan(load);
+
+
+      // ENCODE MESSAGE
+
+      const encodedMessage =
+        encodeURIComponent(message);
+
+
+      const encodedTime =
+        encodeURIComponent(time);
+
+
+      const encodedCarrier =
+        encodeURIComponent(carrier);
+
+
+      // API IMAGE
+
+      imageUrl =
+        `https://brat.siputzx.my.id/iphone-quoted` +
+        `?time=${encodedTime}` +
+        `&batteryPercentage=${batteryNumber}` +
+        `&carrierName=${encodedCarrier}` +
+        `&messageText=${encodedMessage}` +
+        `&emojiStyle=apple`;
+
+
+      // SET IMAGE
+
+      hasilImg.src =
+        imageUrl;
+
+
+      // SUCCESS
+
+      hasilImg.onload = function() {
+
+        tampilkan(result);
+
+      };
+
+
+      // ERROR
+
+      hasilImg.onerror = function() {
+
+        alert(
+          "Gagal mengambil gambar!"
+        );
+
+        tampilkan(home);
+
+      };
+
+    }
+
+
+    // ==============================
+    // DOWNLOAD IMAGE
+    // ==============================
+
+    function downloadGambar() {
+
+      if (!imageUrl) {
+
+        alert(
+          "Belum ada gambar untuk disimpan."
+        );
+
+        return;
+
+      }
+
+
+      const a =
+        document.createElement("a");
+
+
+      a.href =
+        imageUrl;
+
+
+      a.download =
+        "quote-iphone.jpg";
+
+
+      a.target =
+        "_blank";
+
+
+      document.body.appendChild(a);
+
+
+      a.click();
+
+
+      document.body.removeChild(a);
+
+    }
+
+
+    // ==============================
+    // BACK / EDIT
+    // ==============================
+
+    function kembali() {
+
+      tampilkan(home);
+
+    }
+
+
+    // ==============================
+    // ENTER KEY
+    // ==============================
+
+    document
+      .getElementById("message")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            event.preventDefault();
+
+            buatGambar();
+
+          }
+
+        }
+      );
+
+
+  </script></body>
+</html>
